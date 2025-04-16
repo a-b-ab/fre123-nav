@@ -36,7 +36,7 @@ class MongodbBase:
 
         return self._db[db_name]
 
-    def get_collection(self, db_name: str = "", *, collection):
+    def get_collection(self, db_name: str, *, collection):
         """
         获取集合
         :param db_name: database name

@@ -28,8 +28,8 @@ class Config:
     APP_ID_CONFIG = {"fre123": os.getenv("APP_TOKEN", "123456")}
 
     MONGODB_CONFIG = {
-        "mongodb_uri": os.getenv("MONGODB_URI", ""),
-        "operate_db": os.getenv("MONGODB_DB", ""),
+        "mongodb_uri": os.getenv("MONGODB_URI", "mongodb://root:12345678@fre123-mongo:27017/admin"),
+        "operate_db": os.getenv("MONGODB_DB", "admin"),
     }
 
     REDIS_CONFIG = {

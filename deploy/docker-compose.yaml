@@ -23,6 +23,7 @@ services:
       - fre123-network
   fre123-nav-api:
     image: fre123dev/fre123-nav-api:v0.1.0
+    platform: linux/amd64
     restart: always
     container_name: fre123-nav-api
     depends_on:
@@ -37,6 +38,7 @@ services:
       - fre123-network
   fre123-mongo:
     image: mongo:3.6
+    platform: linux/amd64
     restart: always
     container_name: fre123-mongo
     ports:
@@ -45,7 +47,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=12345678
     volumes:
-      - "/fre123/mongo_db_data:/data/db"
+      - "./fre123/mongo_db_data:/data/db"
     networks:
       - fre123-network
 networks:
