@@ -22,29 +22,36 @@ class MongodbBase:
         self.mongodb_uri = self.mongodb_config.get("mongodb_uri")
         self.client = MongoClient(self.mongodb_uri)
 
-    def get_db(self, db_name: str = ""):
+    def get_db(self, db_name: str="admin"):
         """
         获取数据库实例
         :param db_name: database name
         :return: the mongodb db instance
         """
 
-        if not db_name:
-            db_name = self.mongodb_config["operate_db"]
+        db_name = "admin"
+        if not db_name.strip():
+            raise ValueError("数据库名称不能为空！")
+        
         if db_name not in self._db:
             self._db[db_name] = self.client[db_name]
 
+        print(f"当前数据库名称: {db_name}")
         return self._db[db_name]
 
-    def get_collection(self, db_name: str, *, collection):
+    def get_collection(self, db_name: str="admin", *, collection):
         """
         获取集合
         :param db_name: database name
         :param collection: collection name
         :return: the mongodb collection instance
         """
-        if not db_name:
-            db_name = self.mongodb_config["operate_db"]
+        db_name = "admin"
+        if not db_name.strip():
+            raise ValueError("数据库名称不能为空！")
+        if not collection.strip():
+            raise ValueError("集合名称不能为空！")
+
         collection_key = db_name + collection
         if collection_key not in self._collection:
             self._collection[collection_key] = self.get_db(db_name)[collection]
